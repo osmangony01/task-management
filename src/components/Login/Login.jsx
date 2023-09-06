@@ -3,6 +3,7 @@ import { FaEye, FaEyeSlash, } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 import { FcGoogle } from "react-icons/fc";
+import { getAuth } from 'firebase/auth';
 
 
 const Login = () => {
@@ -32,8 +33,19 @@ const Login = () => {
             .then(result => {
                 const loggedUser = result.user;
                 //console.log(loggedUser);
-                form.reset();
+
                 // navigate("/", { replace: true });
+
+                // getAuth()
+                //     .getUser(uid)
+                //     .then((userRecord) => {
+                //         // See the UserRecord reference doc for the contents of userRecord.
+                //         console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
+                //     })
+                //     .catch((error) => {
+                //         console.log('Error fetching user data:', error);
+                //     });
+                form.reset();
                 navigate(from, { replace: true });
             })
             .catch(error => {
@@ -48,6 +60,8 @@ const Login = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
+                
+
                 navigate("/", { replace: true });
                 // const savedUser = { name: loggedUser.displayName, email: loggedUser.email, role: 'student', photo:loggedUser.photoURL };
                 // fetch(`https://summar-camp-server.vercel.app/users`, {

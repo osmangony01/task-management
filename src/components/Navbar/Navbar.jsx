@@ -25,7 +25,7 @@ const Navbar = () => {
 
     const navItems = <>
         <li><ActiveLink to="/">HOME</ActiveLink></li>
-        <li className='px-4'> <ActiveLink to="/profile">PROFILE</ActiveLink> </li>
+        {user && <li className='px-4'> <ActiveLink to="/profile">PROFILE</ActiveLink> </li>}
         {!user && <li className='px-4'> <ActiveLink to="/sign-in">SIGN IN</ActiveLink> </li>}
         {user && <li onClick={handleLogOut}><a>SIGN OUT</a></li>}
     </>

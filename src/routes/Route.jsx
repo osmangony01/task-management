@@ -3,8 +3,9 @@ import Contact from "../components/Contact/Contact";
 import Home from "../components/Home/Home";
 import { createBrowserRouter } from "react-router-dom";
 import Login from "../components/Login/Login";
-import Register from "../components/register/register";
 import Profile from '../components/Profile/Profile';
+import Register from "../components/Register/Register";
+import ProfileLayout from "../components/Profile/Profile";
 
 const router =createBrowserRouter([
     {
@@ -23,15 +24,19 @@ const router =createBrowserRouter([
                 path: "/sign-in",
                 element: <Login></Login>,
             },
-            {
-                path: "/profile",
-                element: <Profile></Profile>,
-            },
+            // {
+            //     path: "/profile",
+            //     element: <Profile></Profile>,
+            // },
             {
                 path: "/register",
                 element:<Register></Register>,
             }
         ]
+    },
+    {
+        path: "/profile",
+        element: <ProfileLayout></ProfileLayout>
     }
 ])
 
