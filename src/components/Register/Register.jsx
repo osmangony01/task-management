@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
+import { addUser } from "../../utilities/localDB";
 
 
 
@@ -24,8 +25,9 @@ const Register = () => {
         const photo_url = form.photo_url.value;
         const addBio = form.bio.value;
         const username = form.username.value;
-        const userInfo = { name, email, password, photo_url, addBio, username };
+        const userInfo = { name, email, photo_url, addBio, username };
         console.log(userInfo);
+        addUser(userInfo);
 
         setPassError("");
         if (password.length < 6) {
@@ -48,7 +50,7 @@ const Register = () => {
                     })
 
                 form.reset();
-                navigate("/", { replace: true });
+                navigate("/profile", { replace: true });
 
                 //.then(() => {
                 //console.log('user name updated ...');

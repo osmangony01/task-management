@@ -3,7 +3,7 @@ import { FaEye, FaEyeSlash, } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../provider/AuthProvider';
 import { FcGoogle } from "react-icons/fc";
-import { getAuth } from 'firebase/auth';
+// import { getAuth } from 'firebase/auth';
 
 
 const Login = () => {
@@ -15,8 +15,8 @@ const Login = () => {
     const { signIn, signInWithGoogle } = useContext(AuthContext);
     const navigate = useNavigate();
 
-    const location = useLocation();
-    const from = location.state?.from?.pathname || "/";
+    // const location = useLocation();
+    // const from = location.state?.from?.pathname || "/";
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -46,7 +46,7 @@ const Login = () => {
                 //         console.log('Error fetching user data:', error);
                 //     });
                 form.reset();
-                navigate(from, { replace: true });
+                navigate("/profile", { replace: true });
             })
             .catch(error => {
                 //console.log(error.message);

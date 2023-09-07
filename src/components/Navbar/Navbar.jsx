@@ -24,9 +24,8 @@ const Navbar = () => {
     //console.log(isRole);
 
     const navItems = <>
-        <li><ActiveLink to="/">HOME</ActiveLink></li>
-        {user && <li className='px-4'> <ActiveLink to="/profile">PROFILE</ActiveLink> </li>}
-        {!user && <li className='px-4'> <ActiveLink to="/sign-in">SIGN IN</ActiveLink> </li>}
+       
+        {!user && <li className='px-4'> <ActiveLink to="/">SIGN IN</ActiveLink> </li>}
         {user && <li onClick={handleLogOut}><a>SIGN OUT</a></li>}
     </>
     // bg-transparent
@@ -34,9 +33,9 @@ const Navbar = () => {
         <div className="relative">
 
 
-            <div className="navbar bg-neutral text-neutral-content  md:px-20 py-2  scroll-py-2.5">
+            <div className="navbar bg-[#3e3c61] text-slate-200  md:px-10 py-2  scroll-py-2">
                 <div className="navbar-start">
-                    <div className="relative" onClick={() => setToggle(!toggle)}>
+                    {/* <div className="relative" onClick={() => setToggle(!toggle)}>
                         <label tabIndex={0} className="btn btn-ghost lg:hidden m-0">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
@@ -47,10 +46,9 @@ const Navbar = () => {
                                 </ul>
                             </div>
                         }
-                    </div>
+                    </div> */}
                     <div className="flex items-center">
-                        <img src="/images/logo3.png" alt="asdf" />
-                        <a className="btn btn-ghost normal-case text-xl md:text-2xl">WorldSpeak</a>
+                        <a className="btn btn-ghost normal-case text-lg">Hi, {user?.displayName}</a>
                     </div>
                 </div>
                 {/* <div className="navbar-center hidden lg:flex">
@@ -61,7 +59,7 @@ const Navbar = () => {
                 <div className="navbar-end">
                     {
                         <div className="hidden lg:flex">
-                            <ul className="menu menu-horizontal px-1 text-[#ece9e9]  text-sm">
+                            <ul className="menu menu-horizontal px-1  text-sm">
                                 {navItems}
                             </ul>
                         </div>
@@ -76,9 +74,9 @@ const Navbar = () => {
                             </label>
                             {
                                 userControl && <div className="absolute right-0 top-10 z-10 text-black">
-                                    <ul className="menu menu-compact mt-3 p-2 shadow bg-base-100 rounded-md w-52">
+                                    <ul className="menu menu-compact mt-3 p-2 shadow bg-base-100 border border-purple-400 rounded-md w-52">
                                         <li><span>{user.email}</span></li>
-                                       
+                                        <li className=''> <ActiveLink to="/">Sign Out</ActiveLink></li>
                                     </ul>
                                 </div>
                             }
