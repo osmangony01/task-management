@@ -27,7 +27,7 @@ const Register = () => {
         const username = form.username.value;
         const userInfo = { name, email, photo_url, addBio, username };
         console.log(userInfo);
-        addUser(userInfo);
+        // addUser(userInfo);
 
         setPassError("");
         if (password.length < 6) {
@@ -48,39 +48,14 @@ const Register = () => {
                     .catch(error => {
                         console.log(error.message);
                     })
-
+                
+                addUser(userInfo);
                 form.reset();
                 navigate("/profile", { replace: true });
-
-                //.then(() => {
-                //console.log('user name updated ...');
-                // const savedUser = { name: data.name, email: data.email, role: 'student', photo:data.photo_url };
-                // fetch(`https://summar-camp-server.vercel.app/users`, {
-                //     method: "POST",
-                //     headers: {
-                //         'content-type': 'application/json'
-                //     },
-                //     body: JSON.stringify(savedUser)
-                // })
-                //     .then(res => res.json())
-                //     .then(data => {
-                //         if (data.insertedId) {
-                //             Swal.fire({
-                //                 position: 'top-end',
-                //                 icon: 'success',
-                //                 title: 'Registration successful',
-                //                 showConfirmButton: false,
-                //                 timer: 1500
-                //             })
-                //             navigate("/", { replace: true });
-                //         }
-                //     })
-
             })
             .catch(error => {
                 console.log(error.message);
             })
-
     }
 
 

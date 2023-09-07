@@ -36,6 +36,64 @@ const addUser = (user) => {
 }
 
 
+// find a user from local storage
+const findUser = (email) => {
+    const users = getUser();
+    const user = users.filter(i => i.email === email);
+    console.log(user);
+    return user;
+}
+
+// find all team of a specific user
+const findAllTeam = (email) => {
+
+    const teamDetails = getTeamCollaborationDetails();
+    const teamInfo = getTeam();
+    //const userTeamDetails = teamDetails.filter((de) => de.email === email);
+    const teamIds = teamDetails.filter(item => item.email === email).map(item => item.teamId);
+    console.log(teamIds);
+
+    const findTeams = teamInfo.filter(item => teamIds.includes(item.teamId));
+    console.log(findTeams);
+    return findTeams;
+    
+}
+
+
+// find a role 
+const findRole = (email) => {
+    const users = getUser();
+    const user = users.filter(item => item.email === email);
+    const role = user[0].role;
+    return role;
+
+}
+
+// add member in team details to collaborate
+
+const addMemberToTeamCollaborate = (details) => {
+    const teamDetails = getTeamCollaborationDetails();
+    //const id = teamDetails.length + 1;
+    //console.log(id);
+    //const newDetails = { teamDetailsId: id, ...details };
+    //console.log(newTeamData);
+
+    teamDetails.push(details);
+
+    localStorage.setItem('teamDetails', JSON.stringify(teamDetails));
+}
+
+const getTeamCollaborationDetails = () => {
+    let teamDetails = [];
+
+    const teamDetailsData = localStorage.getItem('teamDetails');
+    if (teamDetailsData) {
+        teamDetails = JSON.parse(teamDetailsData);
+    }
+    return teamDetails;
+}
+
+
 
 // team management
 
@@ -54,12 +112,12 @@ const addTeam = (team) => {
     const teamInfo = getTeam();
     //console.log(teamInfo)
     //console.log(team);
-    const id = teamInfo.length + 1;
+   // const id = teamInfo.length + 1;
     //console.log(id);
-    const newTeamData = { teamId: id, ...team };
+   // const newTeamData = { teamId: id, ...team };
     //console.log(newTeamData);
 
-    teamInfo.push(newTeamData);
+    teamInfo.push(team);
 
     localStorage.setItem('teamInfo', JSON.stringify(teamInfo));
 
@@ -106,4 +164,11 @@ export {
     getTask,
     getTeam,
     getUser,
+    findUser,
+    addMemberToTeamCollaborate,
+    getTeamCollaborationDetails,
+    findAllTeam,
+    findRole,
+
 }
+
