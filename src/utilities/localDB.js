@@ -163,11 +163,33 @@ const addTeam = (team) => {
 }
 
 
+// find team member
+
+const findTeamMember = (teamId) => {
+    const teamDetails = getTeamCollaborationDetails();
+    const teamMembers = teamDetails.filter(item => item.teamId === teamId);
+    const result = teamMembers.map(item => ({ name: item.name, email: item.email }));
+    return result;
+
+}
 
 
+// assign task
+const assignTask = (taskId, email) => {
+    const tasks = getTask();
+    const updatedTasks = tasks.map(item => {
+        if (item.taskId === taskId) {
+            return {
+                ...item,
+                assignTask: email,
+                progress: "pending"
+            };
+        }
+        return item;
+    });
+    localStorage.setItem('taskData', JSON.stringify(updatedTasks));
 
-
-
+}
 
 
 
@@ -183,7 +205,38 @@ export {
     getTeamCollaborationDetails,
     findAllTeam,
     findRole,
-    findTeamTask
+    findTeamTask,
+    findTeamMember,
+    assignTask,
 
 }
 
+// [
+//     {
+//         "teamDetailsId": 2,
+//         "teamId": 2,
+//         "email": "admin1@gmial.com",
+//         "name": "kingkhan",
+//         "userId": 1,
+//         "status": 1
+//     },
+//     {
+//         "teamDetailsId": 2,
+//         "teamId": 2,
+//         "email": "admin1@gmial.com",
+//         "name": "kingkhan",
+//         "userId": 1,
+//         "status": 1
+//       }
+// ]
+
+// const data = [
+//     {
+//         "teamDetailsId": 2,
+//         "teamId": 1,
+//         "email": "admin1@gmial.com",
+//         "name": "kingkhan",
+//         "userId": 1,
+//         "status": 1
+//     },
+// ];
