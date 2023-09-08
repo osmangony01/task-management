@@ -182,7 +182,8 @@ const assignTask = (taskId, email) => {
             return {
                 ...item,
                 assignTask: email,
-                progress: "pending"
+                progress: "pending",
+                mark:1
             };
         }
         return item;
@@ -191,6 +192,21 @@ const assignTask = (taskId, email) => {
 
 }
 
+// submit task
+const submitTask = (taskId) => {
+    const tasks = getTask();
+    const updatedTasks = tasks.map(item => {
+        if (item.taskId === taskId) {
+            return {
+                ...item,
+                progress: "completed",
+                mark:2
+            };
+        }
+        return item;
+    });
+    localStorage.setItem('taskData', JSON.stringify(updatedTasks));
+}
 
 
 export {
@@ -208,6 +224,8 @@ export {
     findTeamTask,
     findTeamMember,
     assignTask,
+    submitTask,
+
 
 }
 
