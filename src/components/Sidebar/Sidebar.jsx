@@ -10,9 +10,11 @@ import TeamAccordion from './TeamAccordion';
 import { AuthContext } from '../../provider/AuthProvider';
 import { RxCross1 } from 'react-icons/rx';
 
+
 const Sidebar = () => {
 
-    const { user } = useContext(AuthContext);
+    const { user, data } = useContext(AuthContext);
+    //const [teamResult, setTeamResult] = useContext(ContextAPI)
 
     //const { newUser } = useContext(AuthContext);
     //console.log(newUser);
@@ -30,15 +32,17 @@ const Sidebar = () => {
     }
 
     useEffect(() => {
-        setRole(findRole(user.email));
-        const userNew = findUser(user.email);
-        //console.log(userNew);
-        setNewUser(userNew);
-        const teamData = findAllTeam(user.email);
-        //console.log(teamData)
-        setTeams(teamData);
-
-    }, [])
+        if (user?.email) {
+            setRole(findRole(user?.email));
+            const userNew = findUser(user?.email);
+            //console.log(userNew);
+            setNewUser(userNew);
+            const teamData = findAllTeam(user?.email);
+            //console.log(teamData)
+            setTeams(teamData);
+        }
+    
+    }, [data, user])
 
 
     return (
@@ -58,7 +62,7 @@ const Sidebar = () => {
                     <div className="p-2 text-[15px]">
                         <ul>
                             {
-                                role === "admin" && <li className='flex justify-between items-center my-1 rounded px-3 py-1 hover:text-white hover:bg-[#221438]'>
+                                role && role === "admin" && <li className='flex justify-between items-center my-1 rounded px-3 py-1 hover:text-white hover:bg-[#221438]'>
                                     <span>Create Team</span> <Link to="/profile/create-team">
                                         <span className='cursor-pointer'> <HiOutlinePlusSmall size={20}></HiOutlinePlusSmall></span></Link>
                                 </li>
@@ -68,16 +72,9 @@ const Sidebar = () => {
                                     <span>Users</span> <FaUsers></FaUsers>
                                 </li>
                             </Link>
-
-                            {/* <li className='flex justify-between items-center my-1 rounded px-3 py-1 hover:text-white hover:bg-[#221438]'>
-                                <span>Create Task</span>
-                                <Link to="/profile/create-task">
-                                    <span title='create' className='cursor-pointer'> <HiOutlinePlusSmall size={20}></HiOutlinePlusSmall></span></Link>
-                            </li> */}
-
-                            {/* <hr /> */}
+                            
                             {
-                                role === "admin" && <li className='my-1 rounded px-3 py-1 hover:text-white hover:bg-[#221438]'>All Team</li>
+                               role &&  role === "admin" && <li className='my-1 rounded px-3 py-1 hover:text-white hover:bg-[#221438]'>All Team</li>
 
                             }
                             {role === "admin" && <hr />}
@@ -87,7 +84,6 @@ const Sidebar = () => {
                                     return <TeamAccordion key={index} teamId={item.teamId} teamName={item.name}></TeamAccordion>
                                 })
                             }
-
 
                         </ul>
                     </div>

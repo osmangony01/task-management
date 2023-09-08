@@ -50,14 +50,16 @@ const TeamAccordion = ({ teamId, teamName }) => {
     }
 
     useEffect(() => {
-        setRole(findRole(user.email));
-        //const userNew = findUser(user.email);
-        //console.log(userNew);
-        //setNewUser(userNew);
-        // const users = getUser();
-        // setAllUser(users)
+        if (user?.email) {
+            setRole(findRole(user?.email));
+            //const userNew = findUser(user.email);
+            //console.log(userNew);
+            //setNewUser(userNew);
+            // const users = getUser();
+            // setAllUser(users)
+        } 
 
-    }, [])
+    }, [user])
 
     return (
         <div className='pt-2'>

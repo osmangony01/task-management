@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom';
 
 
@@ -6,10 +6,15 @@ import { Outlet } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import Navbar from '../Navbar/Navbar';
 
+
+
+
 const ProfileLayout = () => {
 
-    
+
+
     return (
+
         <div className='flex flex-row bg-slate-200 '>
             <div className=''>
                 <Sidebar></Sidebar>
@@ -21,6 +26,7 @@ const ProfileLayout = () => {
                 </div>
             </div>
         </div>
+
     );
 };
 

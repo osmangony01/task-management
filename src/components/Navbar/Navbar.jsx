@@ -1,17 +1,16 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../provider/AuthProvider";
 import { FaUserCircle } from "react-icons/fa";
 import ActiveLink from "../ActiveLink/ActiveLink";
+import { findUser } from "../../utilities/localDB";
 
 
 const Navbar = () => {
 
-    const { user, logOut } = useContext(AuthContext);
+    const { user,nav, logOut } = useContext(AuthContext);
     const [userControl, setUserControl] = useState(false);
-    const [toggle, setToggle] = useState(false);
-
-    console.log(user.email);
+   
     const navigate = useNavigate();
 
     const handleLogOut = () => {
@@ -22,10 +21,15 @@ const Navbar = () => {
             .catch(error => console.log(error.message))
     }
 
+    console.log(user)
+    // useEffect(() => {
+       
+    // },[user])
+    const u = findUser(user?.email);
 
     const navItems = <>
 
-        {!user && <li className='px-4'> <ActiveLink to="/">SIGN IN</ActiveLink> </li>}
+        {/* {!user && <li className='px-4'> <ActiveLink to="/">SIGN IN</ActiveLink> </li>} */}
         {user && <li onClick={handleLogOut} className="hover:text-white text-sm  cursor-pointer pr-2" ><a>SIGN OUT</a></li>}
     </>
 
@@ -36,7 +40,7 @@ const Navbar = () => {
             <div className="navbar bg-[#3e3c61] text-slate-200  md:px-10 py-2  scroll-py-2">
                 <div className="navbar-start">
                     <div className="flex items-center">
-                        <a className="btn btn-ghost normal-case text-lg">Hi, {user.displayName}</a>
+                        <a className="btn btn-ghost normal-case text-lg">Hi, { u?.name}</a>
                     </div>
                 </div>
                 <div className="navbar-end">

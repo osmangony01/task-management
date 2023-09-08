@@ -9,7 +9,7 @@ import { addUser } from "../../utilities/localDB";
 const Register = () => {
 
     const [passError, setPassError] = useState("");
-    const { createUser, updateUserData } = useContext(AuthContext);
+    const { createUser, setLoading, updateUserData } = useContext(AuthContext);
     const navigate = useNavigate();
 
 
@@ -26,7 +26,7 @@ const Register = () => {
         const addBio = form.bio.value;
         const username = form.username.value;
         const userInfo = { name, email, photo_url, addBio, username };
-        console.log(userInfo);
+        //console.log(userInfo);
         // addUser(userInfo);
 
         setPassError("");
@@ -40,16 +40,17 @@ const Register = () => {
             .then(result => {
                 const CreateUser = result.user;
                 //console.log(CreateUser);
-
+                
                 updateUserData(result.user, name, photo_url)
                     .then(() => {
-                        console.log('user name updated ...');
+                        
                     })
                     .catch(error => {
                         console.log(error.message);
                     })
                 
                 addUser(userInfo);
+                setLoading(false);
                 form.reset();
                 navigate("/profile", { replace: true });
             })
@@ -97,7 +98,7 @@ const Register = () => {
                     </div>
 
                     <button className='w-full py-2 mt-5 bg-white border border-purple-400 hover:bg-purple-800 text-base text-black hover:text-white rounded' >Sign Up</button>
-                    <p className='mt-2 text-sm  text-slate-600 text-end'>Already have an account? <Link to="/login" className='text-blue-700 font-semibold'>Sign In</Link></p>
+                    <p className='mt-2 text-sm  text-slate-600 text-end'>Already have an account? <Link to="/" className='text-blue-700 font-semibold'>Sign In</Link></p>
                 </form>
             </div>
         </div>

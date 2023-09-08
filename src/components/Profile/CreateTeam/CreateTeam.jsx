@@ -5,8 +5,9 @@ import { AuthContext } from "../../../provider/AuthProvider";
 
 const CreateTeam = () => {
 
-    const { user } = useContext(AuthContext);
+    const { user ,data, setData } = useContext(AuthContext);
     const [newUser, setNewUser] = useState(null);
+
 
     const handleCreateTeam = (e) => {
         e.preventDefault();
@@ -22,26 +23,33 @@ const CreateTeam = () => {
 
         const teamD = getTeamCollaborationDetails();
         const id2 = teamD.length + 1;
-        const teamDetails = {
-            teamDetailsId: id2,
-            teamId: id,
-            email: newUser[0].email,
-            name: newUser[0].name,
-            userId: newUser[0].userId,
-            status: 1
+        if (newUser) {
+            const teamDetails = {
+                teamDetailsId: id2,
+                teamId: id,
+                email: newUser.email,
+                name: newUser.name,
+                userId: newUser.userId,
+                status: 1
+            }
+            addMemberToTeamCollaborate(teamDetails);
+        } else {
+            return;
         }
+        setData(!data);
         //console.log(teamDetails);
-        addMemberToTeamCollaborate(teamDetails);
         form.reset();
     }
 
     useEffect(() => {
-        //console.log(user.email)
-        const userNew = findUser(user.email);
-        //console.log(userNew);
-        setNewUser(userNew);
+        if (user?.email) {
+            //console.log(user.email)
+            const userNew = findUser(user?.email);
+            //console.log(userNew);
+            setNewUser(userNew);
+        }
 
-    }, [])
+    }, [user])
 
     return (
         <div className='w-11/12  sm:w-[450px] mx-auto border border-slate-300 px-10 py-4 hover:shadow-lg rounded-md bg-white '>

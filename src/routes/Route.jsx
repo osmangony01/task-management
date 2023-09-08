@@ -7,7 +7,6 @@ import Login from "../components/Login/Login";
 import Register from "../components/Register/Register";
 import ProfileLayout from "../components/Profile/ProfileLayout";
 import CreateTeam from "../components/Profile/CreateTeam/CreateTeam";
-import PrivateRoute from "../routes/PrivateRoute";
 import Layout from "../components/Layout/Layout";
 import CreateTask from "../components/Profile/CreateTask/CreateTask";
 import ViewTask from "../components/Profile/ViewTask/ViewTask";
@@ -32,7 +31,7 @@ const router = createBrowserRouter([
     
     {
         path: "/profile",
-        element: <PrivateRoute><ProfileLayout></ProfileLayout></PrivateRoute> ,
+        element: <ProfileLayout></ProfileLayout> ,
         children: [
             {
                 path: "create-team",

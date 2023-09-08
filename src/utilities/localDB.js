@@ -78,8 +78,8 @@ const addUser = (user) => {
 // find a user from local storage
 const findUser = (email) => {
     const users = getUser();
-    const user = users.filter(i => i.email === email);
-    console.log(user);
+    const user = users?.find(i => i.email === email);
+    console.log(email);
     return user;
 }
 
@@ -102,8 +102,11 @@ const findAllTeam = (email) => {
 // find a role 
 const findRole = (email) => {
     const users = getUser();
-    const user = users.filter(item => item.email === email);
-    const role = user[0].role;
+    const user = users?.find(item => item.email === email);
+    let role = "";
+    if (user) {
+        role = user.role;
+    }
     return role;
 
 }
