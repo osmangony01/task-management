@@ -26,7 +26,7 @@ const Navbar = () => {
     const navItems = <>
 
         {!user && <li className='px-4'> <ActiveLink to="/">SIGN IN</ActiveLink> </li>}
-        {user && <li onClick={handleLogOut}><a>SIGN OUT</a></li>}
+        {user && <li onClick={handleLogOut} className="hover:text-white text-sm  cursor-pointer pr-2" ><a>SIGN OUT</a></li>}
     </>
 
     return (
@@ -42,7 +42,7 @@ const Navbar = () => {
                 <div className="navbar-end">
                     {
                         <div className="hidden lg:flex">
-                            <ul className="menu menu-horizontal px-1  text-sm">
+                            <ul className=" menu-horizontal px-1   text-sm">
                                 {navItems}
                             </ul>
                         </div>

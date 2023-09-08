@@ -13,12 +13,12 @@ import { RxCross1 } from 'react-icons/rx';
 const Sidebar = () => {
 
     const { user } = useContext(AuthContext);
-   
+
     //const { newUser } = useContext(AuthContext);
     //console.log(newUser);
     const [newUser, setNewUser] = useState(null);
     const [role, setRole] = useState(null);
-    
+
     //const getAllTeam = getTeam();
     const [teams, setTeams] = useState(null);
 
@@ -37,7 +37,7 @@ const Sidebar = () => {
         const teamData = findAllTeam(user.email);
         console.log(teamData)
         setTeams(teamData);
-       
+
     }, [])
 
 
@@ -58,27 +58,29 @@ const Sidebar = () => {
                     <div className="p-2 text-[15px]">
                         <ul>
                             {
-                                 role === "admin" && <li className='flex justify-between items-center my-1 rounded px-3 py-1 hover:text-white hover:bg-[#221438]'>
-                                <span>Create Team</span> <Link to="/profile/create-team">
-                                    <span className='cursor-pointer'> <HiOutlinePlusSmall size={20}></HiOutlinePlusSmall></span></Link>
-                            </li>
+                                role === "admin" && <li className='flex justify-between items-center my-1 rounded px-3 py-1 hover:text-white hover:bg-[#221438]'>
+                                    <span>Create Team</span> <Link to="/profile/create-team">
+                                        <span className='cursor-pointer'> <HiOutlinePlusSmall size={20}></HiOutlinePlusSmall></span></Link>
+                                </li>
                             }
-                            <li className='flex justify-between items-center my-1 rounded px-3 py-1 hover:text-white hover:bg-[#221438]'>
-                                <span>Users</span> <FaUsers></FaUsers>
-                            </li>
+                            <Link to="/profile/users">
+                                <li className='flex justify-between items-center my-1 rounded px-3 py-1 hover:text-white hover:bg-[#221438]'>
+                                    <span>Users</span> <FaUsers></FaUsers>
+                                </li>
+                            </Link>
 
-                            <li className='flex justify-between items-center my-1 rounded px-3 py-1 hover:text-white hover:bg-[#221438]'>
+                            {/* <li className='flex justify-between items-center my-1 rounded px-3 py-1 hover:text-white hover:bg-[#221438]'>
                                 <span>Create Task</span>
                                 <Link to="/profile/create-task">
                                     <span title='create' className='cursor-pointer'> <HiOutlinePlusSmall size={20}></HiOutlinePlusSmall></span></Link>
-                            </li>
+                            </li> */}
 
                             {/* <hr /> */}
                             {
                                 role === "admin" && <li className='my-1 rounded px-3 py-1 hover:text-white hover:bg-[#221438]'>All Team</li>
-                               
+
                             }
-                            {  role === "admin"  && <hr />}
+                            {role === "admin" && <hr />}
 
                             {
                                 teams && teams.map((item, index) => {

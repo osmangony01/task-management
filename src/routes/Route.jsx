@@ -11,6 +11,8 @@ import PrivateRoute from "../routes/PrivateRoute";
 import Layout from "../components/Layout/Layout";
 import CreateTask from "../components/Profile/CreateTask/CreateTask";
 import ViewTask from "../components/Profile/ViewTask/ViewTask";
+import ViewMember from "../components/Profile/ViewMember.jsx/ViewMember";
+import AllUser from "../components/Profile/AllUser/AllUser";
 
 const router = createBrowserRouter([
     {
@@ -43,6 +45,14 @@ const router = createBrowserRouter([
             {
                 path: "view-task",
                 element: <ViewTask></ViewTask>
+            },
+            {
+                path: "team-member",
+                element: <ViewMember></ViewMember>
+            },
+            {
+                path: "users",
+                element: <AllUser></AllUser>
             }
         ]
 

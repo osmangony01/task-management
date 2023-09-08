@@ -182,7 +182,7 @@ const assignTask = (taskId, email) => {
             return {
                 ...item,
                 assignTask: email,
-                progress: "pending",
+                progress: 1,
                 mark:1
             };
         }
@@ -199,13 +199,39 @@ const submitTask = (taskId) => {
         if (item.taskId === taskId) {
             return {
                 ...item,
-                progress: "completed",
+                progress: 2,
                 mark:2
             };
         }
         return item;
     });
     localStorage.setItem('taskData', JSON.stringify(updatedTasks));
+}
+
+// find member for invitation 
+const findMemberToInvite = (teamId) => {
+    const users = getUser();
+    const teamDetails = getTeamCollaborationDetails();
+    //console.log(teamDetails);
+    const invitedMember = teamDetails.filter(item => item.teamId == teamId);
+    //console.log(invitedMember);
+    const userIds = invitedMember.map(item => item.userId);
+    //console.log(userIds);
+    const findMember = users.filter(item => !userIds.includes(item.userId));
+    //console.log(findMember);
+    return findMember;
+}
+
+// find each team member
+const findATeamMember = (teamId) => {
+    const teamDetails = getTeamCollaborationDetails();
+    const members = teamDetails.filter(item => item.teamId == teamId);
+    const userIds = members.map(item => item.userId);
+
+    const users = getUser();
+    const findMember = users.filter(item => userIds.includes(item.userId));
+
+    return findMember;
 }
 
 
@@ -225,36 +251,9 @@ export {
     findTeamMember,
     assignTask,
     submitTask,
+    findMemberToInvite,
+    findATeamMember,
+
 
 
 }
-
-// [
-//     {
-//         "teamDetailsId": 2,
-//         "teamId": 2,
-//         "email": "admin1@gmial.com",
-//         "name": "kingkhan",
-//         "userId": 1,
-//         "status": 1
-//     },
-//     {
-//         "teamDetailsId": 2,
-//         "teamId": 2,
-//         "email": "admin1@gmial.com",
-//         "name": "kingkhan",
-//         "userId": 1,
-//         "status": 1
-//       }
-// ]
-
-// const data = [
-//     {
-//         "teamDetailsId": 2,
-//         "teamId": 1,
-//         "email": "admin1@gmial.com",
-//         "name": "kingkhan",
-//         "userId": 1,
-//         "status": 1
-//     },
-// ];

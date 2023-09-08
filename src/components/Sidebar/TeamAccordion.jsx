@@ -5,7 +5,7 @@ import { HiOutlinePlusSmall } from 'react-icons/hi2';
 import { MdKeyboardArrowDown, MdKeyboardArrowRight } from 'react-icons/md';
 import { RiCodeView } from "react-icons/ri";
 import { RxCross1 } from "react-icons/rx";
-import { addMemberToTeamCollaborate, findRole, findUser, getTeamCollaborationDetails, getUser } from '../../utilities/localDB';
+import { addMemberToTeamCollaborate, findMemberToInvite, findRole, findUser, getTeamCollaborationDetails, getUser } from '../../utilities/localDB';
 import { AuthContext } from '../../provider/AuthProvider';
 import { Link } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ const TeamAccordion = ({ teamId, teamName }) => {
     // const { newUser } = useContext(AuthContext);
 
     const { user } = useContext(AuthContext);
-    const [newUser, setNewUser] = useState(null);
+    //const [newUser, setNewUser] = useState(null);
     const [role, setRole] = useState(null);
 
     //console.log(newUser[0])
@@ -29,7 +29,9 @@ const TeamAccordion = ({ teamId, teamName }) => {
         setModal(false);
     }
 
-    const showModal = () => {
+    const handleShowModal = (teamId) => {
+        const findMembers = findMemberToInvite(teamId);
+        setAllUser(findMembers);
         setModal(true);
     }
 
@@ -49,11 +51,11 @@ const TeamAccordion = ({ teamId, teamName }) => {
 
     useEffect(() => {
         setRole(findRole(user.email));
-        const userNew = findUser(user.email);
+        //const userNew = findUser(user.email);
         //console.log(userNew);
-        setNewUser(userNew);
-        const users = getUser();
-        setAllUser(users)
+        //setNewUser(userNew);
+        // const users = getUser();
+        // setAllUser(users)
 
     }, [])
 
@@ -71,7 +73,7 @@ const TeamAccordion = ({ teamId, teamName }) => {
                     {
                         role === "admin" && <li className='flex justify-between items-center pl-4 my-1 rounded px-3 py-2 hover:text-white hover:bg-[#221438]'>
                             <span>- Invite</span>
-                            <span onClick={showModal} className='cursor-pointer'> <FiUserPlus size={18}></FiUserPlus></span>
+                            <span onClick={()=> handleShowModal(teamId)} className='cursor-pointer'> <FiUserPlus size={18}></FiUserPlus></span>
                         </li>
                     }
                     {
@@ -89,12 +91,20 @@ const TeamAccordion = ({ teamId, teamName }) => {
 
                         </li>
                     </Link>
+
+                    <Link to="/profile/team-member" state={{ teamId }}>
+                        <li className='flex justify-between items-center pl-4 my-1 rounded px-3 py-2 hover:text-white hover:bg-[#221438]'>
+                            <span>- view member</span>
+                            <span className='cursor-pointer'><RiCodeView size={18}></RiCodeView></span>
+
+                        </li>
+                    </Link>
                 </ul>
             </div>}
             {
                 modal && <div>
-                    <div className='h-screen w-full fixed top-10 left-0 flex justify-center items-center bg-black bg-opacity-20 '>
-                        <div className='relative bg-[#221438] rounded  shadow-lg w-[450px] text-white  text-[15px] mx-auto h-[350px] z-100'>
+                    <div className='h-screen w-full fixed top-10 left-0 flex justify-center items-center bg-black bg-opacity-20 z-50'>
+                        <div className='relative bg-[#221438] rounded  shadow-lg w-[450px] text-white  text-[15px] mx-auto h-[350px] '>
                             <div className='border-b border-slate-500 px-4 py-2 sticky top-0 font-semibold flex justify-between'>
                                 <span className='flex flex-col '>
                                     <span>Invite team member</span>
