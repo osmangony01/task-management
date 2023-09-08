@@ -5,8 +5,8 @@ import { findATeamMember, findTeamMember } from '../../../utilities/localDB';
 const ViewMember = () => {
     const location = useLocation();
     const [teamMember, setTeamMember] = useState(null);
-    console.log(location.state.teamId)
-    console.log('team :',teamMember);
+    //console.log(location.state.teamId)
+    //console.log('team :',teamMember);
 
     useEffect(() => {
         setTeamMember(findATeamMember(location.state.teamId));

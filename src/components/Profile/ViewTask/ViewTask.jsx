@@ -7,7 +7,7 @@ import { RxCross1 } from 'react-icons/rx';
 
 const ViewTask = () => {
     const location = useLocation();
-    console.log(location.state.teamId)
+    //console.log(location.state.teamId)
 
     const { user } = useContext(AuthContext);
     const [tasks, setTasks] = useState(null);
@@ -24,11 +24,11 @@ const ViewTask = () => {
     const handleDueDate = (e) => {
         setDueDate(e.target.value);
     }
-    console.log(status, dueDate);
+    //console.log(status, dueDate);
 
     const [filterModal, setFilterModal] = useState(false);
     const handleFilterModal = (isOpen) => {
-        console.log(isOpen)
+        //console.log(isOpen)
         setFilterModal(isOpen);
     }
 
@@ -38,12 +38,12 @@ const ViewTask = () => {
     };
 
     const handleAssignTask = (taskId) => {
-        console.log(taskId, selectedTask);
+       // console.log(taskId, selectedTask);
         assignTask(taskId, selectedTask);
         setUpdateTask(!updateTask);
     }
     const handleSubmitTask = (taskId) => {
-        console.log("submit task : ", taskId);
+        //console.log("submit task : ", taskId);
         submitTask(taskId);
         setUpdateTask(!updateTask);
     }
@@ -52,7 +52,7 @@ const ViewTask = () => {
 
     }
 
-    console.log(teamMember);
+    //console.log(teamMember);
 
     useEffect(() => {
         setTasks(findTeamTask(location.state.teamId))

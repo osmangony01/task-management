@@ -35,7 +35,7 @@ const Sidebar = () => {
         //console.log(userNew);
         setNewUser(userNew);
         const teamData = findAllTeam(user.email);
-        console.log(teamData)
+        //console.log(teamData)
         setTeams(teamData);
 
     }, [])

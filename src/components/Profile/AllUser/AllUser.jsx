@@ -6,7 +6,7 @@ const AllUser = () => {
 
     const [users, setUsers] = useState(null);
 
-    console.log('all user ', users)
+    //console.log('all user ', users)
 
     useEffect(() => {
         const users = getUser();

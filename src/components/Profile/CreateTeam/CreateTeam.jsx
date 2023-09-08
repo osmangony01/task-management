@@ -30,15 +30,15 @@ const CreateTeam = () => {
             userId: newUser[0].userId,
             status: 1
         }
-        console.log(teamDetails);
+        //console.log(teamDetails);
         addMemberToTeamCollaborate(teamDetails);
         form.reset();
     }
 
     useEffect(() => {
-        console.log(user.email)
+        //console.log(user.email)
         const userNew = findUser(user.email);
-        console.log(userNew);
+        //console.log(userNew);
         setNewUser(userNew);
 
     }, [])

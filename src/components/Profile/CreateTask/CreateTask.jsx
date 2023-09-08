@@ -19,7 +19,7 @@ const CreateTask = () => {
         const allTask = getTask();
         const id = allTask.length + 1;
         const task = {taskId:id, teamId:location.state.teamId, taskTitle,  dueDate, priority, description, assignTask:"", mark:0, progress:0 };
-        console.log(task)
+        //console.log(task)
         addTask(task)
         form.reset();
     }

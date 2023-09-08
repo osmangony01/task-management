@@ -35,8 +35,8 @@ const TeamAccordion = ({ teamId, teamName }) => {
         setModal(true);
     }
 
-    console.log(teamId);
-    console.log(allUser)
+    //console.log(teamId);
+    //console.log(allUser)
     const handleInvite = (userId, name, email) => {
 
         // console.log(newUser[0].name)
@@ -45,7 +45,7 @@ const TeamAccordion = ({ teamId, teamName }) => {
         const teamD = getTeamCollaborationDetails();
         const id = teamD.length + 1;
         const details = { teamDetailsId: id, userId, teamId, name, email, status: 1 };
-        console.log(details);
+        //console.log(details);
         addMemberToTeamCollaborate(details);
     }
 
