@@ -1,7 +1,12 @@
 import React from 'react';
-import { addTask } from '../../../utilities/localDB';
+import { addTask, getTask } from '../../../utilities/localDB';
+import { useLocation } from 'react-router-dom';
 
 const CreateTask = () => {
+
+    const location = useLocation();
+
+    
 
     const handleCreateTask = (e) => {
         e.preventDefault();
@@ -10,11 +15,16 @@ const CreateTask = () => {
         const dueDate = form.dueDate.value;
         const priority = form.priority.value;
         const description = form.description.value;
-        const task = { taskTitle, dueDate, priority, description };
+
+        const allTask = getTask();
+        const id = allTask.length + 1;
+        const task = {taskId:id, teamId:location.state.teamId, taskTitle,  dueDate, priority, description, assignTask:"", mark:0, progress:"" };
         console.log(task)
-        addTask(task);
+        addTask(task)
         form.reset();
     }
+
+    
 
     return (
         <div className='w-11/12  sm:w-[450px] mx-auto border border-slate-300 px-10 py-4 hover:shadow-lg rounded-md bg-white '>

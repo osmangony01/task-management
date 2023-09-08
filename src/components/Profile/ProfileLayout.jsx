@@ -10,13 +10,13 @@ const ProfileLayout = () => {
 
     
     return (
-        <div className='flex flex-row bg-slate-200'>
-            <div>
+        <div className='flex flex-row bg-slate-200 '>
+            <div className=''>
                 <Sidebar></Sidebar>
             </div>
             <div className='w-full'>
                 <Navbar></Navbar>
-                <div className="overflow-x-auto max-h-[900px] my-4 mx-6 w-full  py-6">
+                <div className=" max-w-full max-h-[900px] my-4  py-6 ">
                     <Outlet></Outlet>
                 </div>
             </div>

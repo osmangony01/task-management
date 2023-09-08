@@ -10,6 +10,7 @@ import CreateTeam from "../components/Profile/CreateTeam/CreateTeam";
 import PrivateRoute from "../routes/PrivateRoute";
 import Layout from "../components/Layout/Layout";
 import CreateTask from "../components/Profile/CreateTask/CreateTask";
+import ViewTask from "../components/Profile/ViewTask/ViewTask";
 
 const router = createBrowserRouter([
     {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
             {
                 path: "create-task",
                 element: <CreateTask></CreateTask>
+            },
+            {
+                path: "view-task",
+                element: <ViewTask></ViewTask>
             }
         ]
 

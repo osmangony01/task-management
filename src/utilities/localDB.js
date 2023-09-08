@@ -1,4 +1,43 @@
 
+
+
+
+
+// task management
+
+const getTask = () => {
+    let taskInfo = [];
+
+    const taskData = localStorage.getItem('taskData');
+    if (taskData) {
+        taskInfo = JSON.parse(taskData);
+    }
+    return taskInfo;
+}
+
+const addTask = (task) => {
+
+    const taskInfo = getTask();
+    //const id = taskInfo.length + 1;
+    //console.log(id);
+    //const newTaskData = { taskId: id, ...task };
+    //console.log(newTaskData);
+    taskInfo.push(task);
+
+    localStorage.setItem('taskData', JSON.stringify(taskInfo));
+}
+
+// find team task
+const findTeamTask = (teamId) => {
+    const tasks = getTask();
+    const teamTask = tasks.filter(item => item.teamId === teamId);
+    return teamTask;
+}
+
+
+
+
+
 // add user
 
 const getUser = () => {
@@ -125,34 +164,9 @@ const addTeam = (team) => {
 
 
 
-// task management
-
-const getTask = () => {
-    let taskInfo = [];
-
-    const taskData = localStorage.getItem('taskData');
-    if (taskData) {
-        taskInfo = JSON.parse(taskData);
-    }
-    return taskInfo;
-}
-
-const addTask = (task) => {
-
-    const taskInfo = getTask();
-    //console.log(taskInfo)
-   // console.log(task);
-    const id = taskInfo.length + 1;
-    //console.log(id);
-    const newTaskData = { taskId: id, ...task };
-    //console.log(newTaskData);
-
-    taskInfo.push(newTaskData);
-
-    localStorage.setItem('taskData', JSON.stringify(taskInfo));
 
 
-}
+
 
 
 
@@ -169,6 +183,7 @@ export {
     getTeamCollaborationDetails,
     findAllTeam,
     findRole,
+    findTeamTask
 
 }
 

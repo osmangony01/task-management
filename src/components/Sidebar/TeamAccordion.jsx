@@ -7,6 +7,7 @@ import { RiCodeView } from "react-icons/ri";
 import { RxCross1 } from "react-icons/rx";
 import { addMemberToTeamCollaborate, findRole, findUser, getTeamCollaborationDetails, getUser } from '../../utilities/localDB';
 import { AuthContext } from '../../provider/AuthProvider';
+import { Link } from 'react-router-dom';
 
 const TeamAccordion = ({ teamId, teamName }) => {
     const [show, setShow] = useState(false);
@@ -18,10 +19,10 @@ const TeamAccordion = ({ teamId, teamName }) => {
     const [role, setRole] = useState(null);
 
     //console.log(newUser[0])
-    
+
     //console.log(role);
 
-    
+
     const [allUser, setAllUser] = useState(null);
 
     const handleModal = () => {
@@ -41,7 +42,7 @@ const TeamAccordion = ({ teamId, teamName }) => {
         //const { name, email } = newUser[0];
         const teamD = getTeamCollaborationDetails();
         const id = teamD.length + 1;
-        const details = {teamDetailsId: id, userId, teamId, name, email, status: 1 };
+        const details = { teamDetailsId: id, userId, teamId, name, email, status: 1 };
         console.log(details);
         addMemberToTeamCollaborate(details);
     }
@@ -68,21 +69,26 @@ const TeamAccordion = ({ teamId, teamName }) => {
             {show && <div>
                 <ul className='text-sm'>
                     {
-                       role === "admin" && <li className='flex justify-between items-center pl-4 my-1 rounded px-3 py-2 hover:text-white hover:bg-[#221438]'>
+                        role === "admin" && <li className='flex justify-between items-center pl-4 my-1 rounded px-3 py-2 hover:text-white hover:bg-[#221438]'>
                             <span>- Invite</span>
                             <span onClick={showModal} className='cursor-pointer'> <FiUserPlus size={18}></FiUserPlus></span>
                         </li>
                     }
                     {
                         role === 'admin' && <li className='flex justify-between items-center pl-4 my-1 rounded px-3 py-2 hover:hover:bg-[#221438]'>
-                        <span>- Create Task </span>
-                        <span className='cursor-pointer'> <HiOutlinePlusSmall size={20}></HiOutlinePlusSmall></span>
-                    </li>
+                            <span>- Create Task </span>
+                            <Link to="/profile/create-task" state={{ teamId }}>
+                                <span title='create' className='cursor-pointer'> <HiOutlinePlusSmall size={20}></HiOutlinePlusSmall></span></Link>
+                        </li>
                     }
-                    <li className='flex justify-between items-center pl-4 my-1 rounded px-3 py-2 hover:text-white hover:bg-[#221438]'>
-                        <span>- View Task</span>
-                        <span className='cursor-pointer'><RiCodeView size={18}></RiCodeView></span>
-                    </li>
+
+                    <Link to="/profile/view-task" state={{ teamId }}>
+                        <li className='flex justify-between items-center pl-4 my-1 rounded px-3 py-2 hover:text-white hover:bg-[#221438]'>
+                            <span>- View Task</span>
+                            <span className='cursor-pointer'><RiCodeView size={18}></RiCodeView></span>
+
+                        </li>
+                    </Link>
                 </ul>
             </div>}
             {
